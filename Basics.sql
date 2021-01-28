@@ -1,4 +1,6 @@
 #Person Table
+-- DROP TABLE person, favorite_food;
+
 CREATE TABLE person(person_id SMALLINT UNSIGNED,fname VARCHAR(20),lname VARCHAR(20), eye_color ENUM('BR','BL', 'GR'), gender ENUM('M','F'), 
 						birth_date DATE, street VARCHAR(30), city VARCHAR(20), state VARCHAR(20), country VARCHAR(20),
 							postal_code VARCHAR(20), CONSTRAINT pk_person PRIMARY KEY(person_id));
@@ -56,5 +58,23 @@ WHERE person_id = 1
 ORDER BY food;
 
 
+#UPDATING DATA (with WHERE)
+
+UPDATE person
+	SET street = '1225 Tremont St.', city = 'Boston', state = 'MA', country = 'USA', postal_code = '02138'
+    WHERE person_id = 1;
+    
+SELECT person_id, fname, lname, birth_date, eye_color, street, city, state, country, postal_code
+	FROM person; # could also say WHERE person_id < 10 , affecting multiple rows 
+
+	
+#Delete Susan from the table
+
+DELETE FROM person
+	WHERE person_id = 2;
 
 
+#Set date format, shouldnt rely on default format
+UPDATE person
+	SET birth_date = str_to_date('DEC-21-1980', '%b-%d-%Y')
+    WHERE person_id = 1;
